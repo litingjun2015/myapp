@@ -11,3 +11,4 @@ Route::put('articles/{id}', 'ArticleController@update');
 Route::delete('articles/{id}', 'ArticleController@delete');
 
 Route::get('test', 'TestController@index');
+Route::get('wechat', 'TestController@wechat');

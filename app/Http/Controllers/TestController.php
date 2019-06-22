@@ -9,7 +9,8 @@ require __DIR__ . '/../../../vendor/autoload.php';
 # Imports the Google Cloud client library
 use Google\Cloud\Translate\TranslateClient;
 
-# Your Google Cloud Platform project ID
+
+use EasyWeChat\Factory;
 
 
 class TestController extends Controller
@@ -18,6 +19,7 @@ class TestController extends Controller
     {
         putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
         
+        # Your Google Cloud Platform project ID
         $projectId = 'starlit-granite-20190622';
 
         # Instantiates a client
@@ -42,5 +44,27 @@ class TestController extends Controller
 
 
         return  $translation['text'];
+    }
+
+
+    public function wechat()
+    {        
+        $config = [
+            'app_id' => 'wx4fcd7ab419b697c2',
+            'secret' => '313ef808ffed2c0dc14dc7807f81a165',
+            'token' => 'TestToken',
+            'response_type' => 'array',
+        ];
+
+        $app = Factory::officialAccount($config);
+
+
+        $app->server->push(function ($message) {
+            return "您好！欢迎使用 EasyWeChat!";
+        });
+
+        $response = $app->server->serve();    
+
+        return $response;
     }
 }
