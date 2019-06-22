@@ -16,31 +16,31 @@ class TestController extends Controller
 {
     public function index()
     {
-        // putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
+        putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
         
-        // $projectId = 'starlit-granite-20190622';
+        $projectId = 'starlit-granite-20190622';
 
-        // # Instantiates a client
-        // $translate = new TranslateClient([
-        //     'projectId' => $projectId
-        // ]);
+        # Instantiates a client
+        $translate = new TranslateClient([
+            'projectId' => $projectId
+        ]);
 
-        // # The text to translate
-        // $text = 'Hello, world!';
-        // # The target language
-        // $target = 'ru';
+        # The text to translate
+        $text = 'Hello, world!';
+        # The target language
+        $target = 'ru';
 
-        // # Translates some text into Russian
-        // $translation = $translate->translate($text, [
-        //     'target' => $target
-        // ]);
+        # Translates some text into Russian
+        $translation = $translate->translate($text, [
+            'target' => $target
+        ]);
 
-        // echo 'Text: ' . $text . '
-        // Translation: ' . $translation['text'];
+        echo 'Text: ' . $text . '
+        Translation: ' . $translation['text'];
 
         
 
 
-        return  'Translation is coming';
+        return  $translation['text'];
     }
 }
