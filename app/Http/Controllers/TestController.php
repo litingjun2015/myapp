@@ -28,7 +28,7 @@ class TestController extends Controller
         # The text to translate
         $text = 'Hello, world!';
         # The target language
-        $target = 'cn';
+        $target = 'vi';
 
         # Translates some text into Russian
         $translation = $translate->translate($text, [
