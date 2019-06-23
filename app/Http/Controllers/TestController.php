@@ -97,7 +97,7 @@ class TestController extends Controller
                 'projectId' => $projectId
             ]);
 
-            switch ($message->MsgType) {
+            switch ($message['MsgType']) {
                 case 'event':
                     break;
                 case 'text':
