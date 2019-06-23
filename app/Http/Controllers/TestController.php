@@ -88,6 +88,7 @@ class TestController extends Controller
 
 
         $app->server->push(function ($message) {
+            \Log::debug($message);
             return $message;
         });
 
