@@ -11,6 +11,7 @@ use Google\Cloud\Translate\TranslateClient;
 
 
 use EasyWeChat\Factory;
+use EasyWeChat\Foundation\Application;
 
 
 class TestController extends Controller
@@ -95,7 +96,9 @@ class TestController extends Controller
         ];
 
         $app = Factory::officialAccount($config);
-        $temporary = $app->material_temporary;
+
+        $app2 = new Application($config);
+        $temporary = $app2->material_temporary;
 
         \Log::debug('logging..');
 
