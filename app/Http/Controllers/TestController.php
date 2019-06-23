@@ -53,6 +53,7 @@ class TestController extends Controller
             'app_id' => 'wx4fcd7ab419b697c2',
             'secret' => '313ef808ffed2c0dc14dc7807f81a165',
             'token' => 'TestToken',
+            'aes_key' => 'JH9XRkdMzta8CgcAc8FuCqSqSNwiAbH3pKZROdRnbzq',
             'response_type' => 'array',
         ];
 
