@@ -40,9 +40,6 @@ class TestController extends Controller
         echo 'Text: ' . $text . '
         Translation: ' . $translation['text'];
 
-        
-
-
         return  $translation['text'];
     }
 
@@ -88,9 +85,33 @@ class TestController extends Controller
 
 
         $app->server->push(function ($message) {
-            \Log::debug($message);
-            \Log::debug($message['Content']);
-            return $message['Content'];
+
+            //TODO
+            putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
+        
+            # Your Google Cloud Platform project ID
+            $projectId = 'starlit-granite-20190622';
+
+            # Instantiates a client
+            $translate = new TranslateClient([
+                'projectId' => $projectId
+            ]);
+
+            # The text to translate
+            $text = $message['Content'];
+            # The target language
+            $target = 'vi';
+
+            # Translates some text into Russian
+            $translation = $translate->translate($text, [
+                'target' => $target
+            ]);
+
+            $result = '【'.$message['Content'].'】 所对应越南语的意思是：\n'.$translation['text'];
+
+            //TODO 发送语音
+            
+            return $result;
         });
 
         $response = $app->server->serve();    
