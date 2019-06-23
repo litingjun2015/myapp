@@ -132,6 +132,9 @@ class TestController extends Controller
                     $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
                     $timestring = $date.$millisecond;
 
+                    \Log::debug("audio".$timestring.".raw");
+                    \Log::debug($message['MediaId']);
+
                     $stream = $app->media->get($message['MediaId']);
 
                     if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
