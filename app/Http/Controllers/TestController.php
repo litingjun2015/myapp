@@ -107,7 +107,7 @@ class TestController extends Controller
                 'target' => $target
             ]);
 
-            $result = '【'.$message['Content'].'】 所对应越南语的意思是：\n'.$translation['text'];
+            $result = '【'.$message['Content'].'】 所对应越南语的意思是：\r\n'.$translation['text'];
 
             //TODO 发送语音
             
