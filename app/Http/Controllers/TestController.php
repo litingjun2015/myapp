@@ -11,7 +11,6 @@ use Google\Cloud\Translate\TranslateClient;
 
 
 use EasyWeChat\Factory;
-use EasyWeChat\Foundation\Application;
 
 
 class TestController extends Controller
@@ -97,8 +96,8 @@ class TestController extends Controller
 
         $app = Factory::officialAccount($config);
 
-        $app2 = new Application($config);
-        $temporary = $app2->material_temporary;
+        
+
 
         \Log::debug('logging..');
 
@@ -133,7 +132,16 @@ class TestController extends Controller
                     $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
                     $timestring = $date.$millisecond;
 
-                    $temporary->download($message['MediaId'], "/tmp/", "audio".$timestring.".raw");
+                    $stream = $app->media->get($message['MediaId']);
+
+                    if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
+                        // // 以内容 md5 为文件名存到本地
+                        // $stream->save('保存目录');
+
+                        // 自定义文件名，不需要带后缀
+                        $stream->saveAs('/tmp/', "audio".$timestring.".raw");
+                    }
+
                     break;
                 case 'video':                
                     break;
