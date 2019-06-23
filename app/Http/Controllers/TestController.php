@@ -48,9 +48,7 @@ class TestController extends Controller
 
 
     public function wechat()
-    {        
-        
-
+    {                
         $config = [
             'app_id' => 'wx4fcd7ab419b697c2',
             'secret' => '313ef808ffed2c0dc14dc7807f81a165',
@@ -90,7 +88,7 @@ class TestController extends Controller
 
 
         $app->server->push(function ($message) {
-            return "您好！欢迎使用 EasyWeChat!";
+            return $message;
         });
 
         $response = $app->server->serve();    
