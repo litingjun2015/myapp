@@ -17,30 +17,30 @@ class TestController extends Controller
 {
     public function index()
     {
-        putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
+        // putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
         
-        # Your Google Cloud Platform project ID
-        $projectId = 'starlit-granite-20190622';
+        // # Your Google Cloud Platform project ID
+        // $projectId = 'starlit-granite-20190622';
 
-        # Instantiates a client
-        $translate = new TranslateClient([
-            'projectId' => $projectId
-        ]);
+        // # Instantiates a client
+        // $translate = new TranslateClient([
+        //     'projectId' => $projectId
+        // ]);
 
-        # The text to translate
-        $text = 'Hello, world!';
-        # The target language
-        $target = 'vi';
+        // # The text to translate
+        // $text = 'Hello, world!';
+        // # The target language
+        // $target = 'vi';
 
-        # Translates some text into Russian
-        $translation = $translate->translate($text, [
-            'target' => $target
-        ]);
+        // # Translates some text into Russian
+        // $translation = $translate->translate($text, [
+        //     'target' => $target
+        // ]);
 
-        echo 'Text: ' . $text . '
-        Translation: ' . $translation['text'];
+        // echo 'Text: ' . $text . '
+        // Translation: ' . $translation['text'];
 
-        return  $translation['text'];
+        return  'hello world';
     }
 
 
@@ -96,6 +96,29 @@ class TestController extends Controller
             $translate = new TranslateClient([
                 'projectId' => $projectId
             ]);
+
+            switch ($message->MsgType) {
+                case 'event':
+                    break;
+                case 'text':
+                    \Log::debug('收到文字消息');
+                    break;
+                case 'image':
+                    break;
+                case 'voice':
+                    \Log::debug('收到语音消息');
+                    break;
+                case 'video':                
+                    break;
+                case 'location':
+                    break;
+                case 'link':
+                    break;
+                // ... 其它消息
+                default:
+                    break;
+            }
+
 
             # The text to translate
             $text = $message['Content'];
