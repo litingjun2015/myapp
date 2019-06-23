@@ -15,6 +15,14 @@ use EasyWeChat\Factory;
 
 class TestController extends Controller
 {
+    function get_millisecond()  
+    {  
+            list($usec, $sec) = explode(" ", microtime());  
+            $msec=round($usec*1000);  
+            return $msec;  
+               
+    }  
+
     public function index()
     {
         // putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
@@ -40,7 +48,14 @@ class TestController extends Controller
         // echo 'Text: ' . $text . '
         // Translation: ' . $translation['text'];
 
-        return  'hello world';
+
+        $date = date("Ymdhms");
+        list($usec, $sec) = explode(" ", microtime());  
+        $msec=round($usec*1000);  
+        $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
+        $timestring = $date.$millisecond;
+
+        return  $date.$millisecond;
     }
 
 
@@ -80,6 +95,7 @@ class TestController extends Controller
         ];
 
         $app = Factory::officialAccount($config);
+        $temporary = $app->material_temporary;
 
         \Log::debug('logging..');
 
@@ -106,7 +122,15 @@ class TestController extends Controller
                 case 'image':
                     break;
                 case 'voice':
-                    \Log::debug('收到语音消息');
+                    \Log::debug('收到语音消息');  
+
+                    $date = date("Ymdhms");
+                    list($usec, $sec) = explode(" ", microtime());  
+                    $msec=round($usec*1000);  
+                    $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
+                    $timestring = $date.$millisecond;
+
+                    $temporary->download($message['MediaId'], "/tmp/", "audio".$timestring.".raw");
                     break;
                 case 'video':                
                     break;
