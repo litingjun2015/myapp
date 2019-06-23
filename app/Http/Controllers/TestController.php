@@ -94,6 +94,7 @@ class TestController extends Controller
         });
 
         $response = $app->server->serve();    
+        \Log::debug($response);
 
         return $response;
     }
