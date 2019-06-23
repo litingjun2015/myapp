@@ -125,6 +125,9 @@ return [
 
     'google.credentials' => 'google.credentials.json',
 
+    'log' => 'daily',
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
