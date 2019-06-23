@@ -49,7 +49,7 @@ class TestController extends Controller
 
     public function wechat()
     {        
-        \Log::info('logging..');
+        \Log::debug('logging..');
 
         $config = [
             'app_id' => 'wx4fcd7ab419b697c2',
