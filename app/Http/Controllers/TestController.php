@@ -49,7 +49,7 @@ class TestController extends Controller
 
     public function wechat()
     {        
-        \Log::debug('logging..');
+        
 
         $config = [
             'app_id' => 'wx4fcd7ab419b697c2',
@@ -57,9 +57,36 @@ class TestController extends Controller
             'token' => 'TestToken',
             'aes_key' => 'JH9XRkdMzta8CgcAc8FuCqSqSNwiAbH3pKZROdRnbzq',
             'response_type' => 'array',
+
+             /**
+             * 日志配置
+             *
+             * level: 日志级别, 可选为：
+             *         debug/info/notice/warning/error/critical/alert/emergency
+             * path：日志文件位置(绝对路径!!!)，要求可写权限
+             */
+            'log' => [
+                'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
+                'channels' => [
+                    // 测试环境
+                    'dev' => [
+                        'driver' => 'single',
+                        'path' => '/tmp/easywechat.log',
+                        'level' => 'debug',
+                    ],
+                    // 生产环境
+                    'prod' => [
+                        'driver' => 'daily',
+                        'path' => '/tmp/easywechat.log',
+                        'level' => 'info',
+                    ],
+                ],
+            ],
         ];
 
         $app = Factory::officialAccount($config);
+
+        \Log::debug('logging..');
 
 
         $app->server->push(function ($message) {
