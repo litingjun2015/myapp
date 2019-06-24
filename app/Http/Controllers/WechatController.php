@@ -19,6 +19,7 @@ use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 use EasyWeChat\Factory;
 
 use EasyWeChat\Kernel\Messages\Text;
+use EasyWeChat\Kernel\Messages\Voice;
 
 
 class WechatController extends Controller
@@ -184,11 +185,7 @@ class WechatController extends Controller
  
                      $result = '【'.$text.'】 所对应中文的意思是：'.$translation['text'];
                 }
-                
-                //TODO 发送语音
-                $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
-                \Log::debug($audio['media_id']);  
-                
+                                                
             }
             
             \Log::debug('test multi msg');
@@ -196,6 +193,15 @@ class WechatController extends Controller
 
             $message2 = new Text($result);
             $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
+
+            //TODO 发送语音
+            $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
+            \Log::debug($audio['media_id']);  
+
+            $voice = new Voice($audio['media_id']);
+            $app->customer_service->message($voice)->to($message['FromUserName'])->send();
+
+            
             
             return $news1;
         });
