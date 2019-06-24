@@ -175,15 +175,28 @@ class TestController extends Controller
                 \Log::debug("Language code: $result[languageCode]\n");
                 \Log::debug("Confidence: $result[confidence]\n");
 
-                # The target language
-                $target = 'vi';
+                if($result[languageCode] === 'zh-CN'){
+                    # The target language
+                    $target = 'vi';
 
-                # Translates some text into Russian
-                $translation = $translate->translate($text, [
-                    'target' => $target
-                ]);
+                    # Translates some text into Russian
+                    $translation = $translate->translate($text, [
+                        'target' => $target
+                    ]);
 
-                $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
+                    $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
+                }else if($result[languageCode] === 'vi'){
+                     # The target language
+                     $target = 'zh-CN';
+
+                     # Translates some text into Russian
+                     $translation = $translate->translate($text, [
+                         'target' => $target
+                     ]);
+ 
+                     $result = '【'.$message['Content'].'】 所对应中文的意思是：'.$translation['text'];
+                }
+                
 
             }
             
