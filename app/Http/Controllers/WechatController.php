@@ -203,7 +203,7 @@ class WechatController extends Controller
 
             
             
-            return $news1;
+            // return $news1;
         });
 
         $response = $app->server->serve();    
