@@ -185,7 +185,7 @@ class WechatController extends Controller
             \Log::debug('test multi msg');
             $news1 = $result;
             
-            return [$news1];
+            return [$news1, $news1];
         });
 
         $response = $app->server->serve();    
