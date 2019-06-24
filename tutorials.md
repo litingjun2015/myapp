@@ -7,7 +7,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/vagrant/Code/myapp/config/starlit-g
 
 ##
 php artisan make:controller TestController
-php artisan make:controller WechatController
+php artisan make:controller WechatController 
 
 
 ## The routes/api.php file:
