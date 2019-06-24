@@ -111,6 +111,7 @@ class WechatController extends Controller
 
                     # Detects speech in the audio file
                     $response = $client->recognize($config, $stream);
+                    \Log::debug($response);
 
                     # Print most likely transcription
                     foreach ($response->getResults() as $result) {
