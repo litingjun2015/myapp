@@ -63,11 +63,11 @@ class WechatController extends Controller
         $app = Factory::officialAccount($config);
 
         // 被动推送
-        // $app->server->push(function ($message) {
+        $app->server->push(function ($message) {
 
-        //     echo  '您好！lao ding。';
-        //     echo  '您好！lao ding。';
-        // });
+            echo  '您好！lao ding。';
+            echo  '您好！lao ding。';
+        });
 
         // // 被动推送
         // $app->server->push(function ($message) {
