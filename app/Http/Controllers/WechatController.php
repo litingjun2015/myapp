@@ -96,11 +96,14 @@ class WechatController extends Controller
 
                     if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
                         // // 以内容 md5 为文件名存到本地
-                        // $stream->save('保存目录');
+                        $stream->save('/tmp');
 
                         // 自定义文件名，不需要带后缀
-                        $stream->saveAs('/tmp/', "audio".$timestring.".raw");
+                        // $stream->saveAs('/tmp/', "audio".$timestring.".raw");
                     }
+
+                    \Log::debug('保存语音消息');  
+
 
                     break;
                 case 'video':                
