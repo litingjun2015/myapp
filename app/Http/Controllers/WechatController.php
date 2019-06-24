@@ -62,7 +62,7 @@ class WechatController extends Controller
 
         $app = Factory::officialAccount($config);
 
-        $app->server->push(function ($message) use ($app) {
+        $app->server->setMessageHandler(function ($message) use ($app) {
 
             //TODO
             putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
@@ -178,13 +178,14 @@ class WechatController extends Controller
                 
                 //TODO 发送语音
                 $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
-                \Log::debug($audio);  
+                \Log::debug($audio['media_id']);  
 
             }
             
-                  
+            \Log::debug('test multi msg');
+            $news1 = $result;
             
-            return $result;
+            return [$news1];
         });
 
         $response = $app->server->serve();    
