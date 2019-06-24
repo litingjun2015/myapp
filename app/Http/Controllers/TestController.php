@@ -313,6 +313,7 @@ class TestController extends Controller
             return $result;
         });
 
+        $response = $app->server->serve(); 
         $response = $app->server->serve();    
         \Log::debug($response);
 
