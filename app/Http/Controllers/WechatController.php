@@ -212,8 +212,16 @@ class WechatController extends Controller
                     $response = $client->synthesizeSpeech($synthesisInputText, $voice, $audioConfig);
                     $audioContent = $response->getAudioContent();
 
+                    $date = date("Ymdhms");
+                    list($usec, $sec) = explode(" ", microtime());  
+                    $msec=round($usec*1000);  
+                    $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
+                    $timestring = $date.$millisecond;
+
+                    \Log::debug("audio".$timestring.".raw");
+
                     // the response's audioContent is binary
-                    file_put_contents("/tmp/output".$message['FromUserName']."mp3", $audioContent);
+                    file_put_contents("/tmp/audio".$timestring.".mp3", $audioContent);
 
 
                 }else if($detectResult['languageCode'] === 'vi'){
@@ -237,7 +245,7 @@ class WechatController extends Controller
             $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
 
             //TODO 发送语音
-            $audio = $app->media->uploadVoice("/tmp/output".$message['FromUserName']."mp3");
+            $audio = $app->media->uploadVoice("/tmp/audio".$timestring.".mp3");
             \Log::debug($audio['media_id']);  
 
             $voice = new Voice($audio['media_id']);
