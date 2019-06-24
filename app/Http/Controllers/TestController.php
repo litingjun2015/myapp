@@ -171,11 +171,11 @@ class TestController extends Controller
             } else {
 
                 # 语言检测
-                $result = $translate->detectLanguage($text);
+                $detectResult = $translate->detectLanguage($text);
                 \Log::debug("Language code: $result[languageCode]\n");
                 \Log::debug("Confidence: $result[confidence]\n");
 
-                if($result['languageCode'] === 'zh-CN'){
+                if($detectResult['languageCode'] === 'zh-CN'){
                     # The target language
                     $target = 'vi';
 
@@ -183,9 +183,10 @@ class TestController extends Controller
                     $translation = $translate->translate($text, [
                         'target' => $target
                     ]);
+                    \Log::debug($translation);
 
                     $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
-                }else if($result['languageCode'] === 'vi'){
+                }else if($detectResult['languageCode'] === 'vi'){
                      # The target language
                      $target = 'zh-CN';
 
@@ -193,6 +194,7 @@ class TestController extends Controller
                      $translation = $translate->translate($text, [
                          'target' => $target
                      ]);
+                     \Log::debug($translation);                    
  
                      $result = '【'.$message['Content'].'】 所对应中文的意思是：'.$translation['text'];
                 }
