@@ -10,6 +10,11 @@ require __DIR__ . '/../../../vendor/autoload.php';
 # Imports the Google Cloud client library
 use Google\Cloud\Translate\TranslateClient;
 
+# Imports the Google Cloud client library
+use Google\Cloud\Speech\V1\SpeechClient;
+use Google\Cloud\Speech\V1\RecognitionAudio;
+use Google\Cloud\Speech\V1\RecognitionConfig;
+use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 
 use EasyWeChat\Factory;
 
@@ -94,15 +99,34 @@ class WechatController extends Controller
 
                     $stream = $app->media->get($message['MediaId']);
 
-                    if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
-                        // // 以内容 md5 为文件名存到本地
-                        $stream->save('/tmp/');
+                    # The audio file's encoding, sample rate and language
+                    $config = new RecognitionConfig([
+                        'encoding' => AudioEncoding::LINEAR16,
+                        'sample_rate_hertz' => 32000,
+                        'language_code' => 'en-US'
+                    ]);
 
-                        // 自定义文件名，不需要带后缀
-                        // $stream->saveAs('/tmp/', "audio".$timestring.".raw");
+                    # Instantiates a client
+                    $client = new SpeechClient();
+
+                    # Detects speech in the audio file
+                    $response = $client->recognize($config, $stream);
+
+                    # Print most likely transcription
+                    foreach ($response->getResults() as $result) {
+                        $alternatives = $result->getAlternatives();
+                        $mostLikely = $alternatives[0];
+                        $transcript = $mostLikely->getTranscript();
+                        // printf('Transcript: %s' . PHP_EOL, $transcript);
+
+                        \Log::debug($transcript);  
+
+                        
                     }
 
                     \Log::debug('保存语音消息');  
+
+                    
 
 
                     break;
