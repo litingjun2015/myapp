@@ -164,7 +164,7 @@ class TestController extends Controller
             # The text to translate
             $text = $message['Content'];
 
-            if($text == '汇率'){
+            if($text === '汇率') {
                 $result = "1美元=6.8698人民币
                 1人民币=0.1456美元
                 
@@ -173,7 +173,7 @@ class TestController extends Controller
                 
                 1美元=23137.75越南盾
                 1越南盾=0.000043美元";
-            }else{
+            } else {
 
                 # The target language
                 $target = 'vi';
