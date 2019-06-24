@@ -234,6 +234,43 @@ class WechatController extends Controller
                      \Log::debug($translation);
  
                      $result = '【'.$text.'】 所对应中文的意思是：'.$translation['text'];
+
+
+                     // to speech
+
+                    // sets text to be synthesised
+                    $synthesisInputText = (new SynthesisInput())
+                    ->setText($translation['text']);
+
+                    // build the voice request, select the language code ("en-US") and the ssml
+                    // voice gender
+                    $voice = (new VoiceSelectionParams())
+                    ->setLanguageCode('zh-CN')
+                    ->setSsmlGender(SsmlVoiceGender::FEMALE);
+
+                    // Effects profile
+                    $effectsProfileId = "telephony-class-application";
+
+                    // select the type of audio file you want returned
+                    $audioConfig = (new AudioConfig())
+                    ->setAudioEncoding(AudioEncoding::MP3)
+                    ->setEffectsProfileId(array($effectsProfileId));
+
+                    // perform text-to-speech request on the text input with selected voice
+                    // parameters and audio file type
+                    $response = $client->synthesizeSpeech($synthesisInputText, $voice, $audioConfig);
+                    $audioContent = $response->getAudioContent();
+
+                    $date = date("Ymdhms");
+                    list($usec, $sec) = explode(" ", microtime());  
+                    $msec=round($usec*1000);  
+                    $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
+                    $timestring = $date.$millisecond;
+
+                    \Log::debug("audio".$timestring.".raw");
+
+                    // the response's audioContent is binary
+                    file_put_contents("/tmp/audio".$timestring.".mp3", $audioContent);
                 }
                                                 
             }
