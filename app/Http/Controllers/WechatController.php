@@ -213,7 +213,7 @@ class WechatController extends Controller
                     $audioContent = $response->getAudioContent();
 
                     // the response's audioContent is binary
-                    file_put_contents("output'.$message['FromUserName'].mp3", $audioContent);
+                    file_put_contents("/tmp/output".$message['FromUserName']."mp3", $audioContent);
 
 
                 }else if($detectResult['languageCode'] === 'vi'){
@@ -237,7 +237,7 @@ class WechatController extends Controller
             $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
 
             //TODO 发送语音
-            $audio = $app->media->uploadVoice("output'.$message['FromUserName'].mp3");
+            $audio = $app->media->uploadVoice("/tmp/output".$message['FromUserName']."mp3");
             \Log::debug($audio['media_id']);  
 
             $voice = new Voice($audio['media_id']);
