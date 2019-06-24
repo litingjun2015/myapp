@@ -62,7 +62,7 @@ class WechatController extends Controller
 
         $app = Factory::officialAccount($config);
 
-        $app->server->setMessageHandler(function ($message) use ($app) {
+        $app->server->push(function ($message) use ($app) {
 
             //TODO
             putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
