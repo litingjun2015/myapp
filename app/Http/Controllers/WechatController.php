@@ -71,8 +71,7 @@ class WechatController extends Controller
 
             \Log::debug($message);          
             
-            $message2 = new Text('Hello world!');
-            $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
+            
 
             //TODO
             putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
@@ -181,7 +180,7 @@ class WechatController extends Controller
                      $translation = $translate->translate($text, [
                          'target' => $target
                      ]);
-                     \Log::debug($translation);                    
+                     \Log::debug($translation);
  
                      $result = '【'.$text.'】 所对应中文的意思是：'.$translation['text'];
                 }
@@ -189,11 +188,14 @@ class WechatController extends Controller
                 //TODO 发送语音
                 $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
                 \Log::debug($audio['media_id']);  
-
+                
             }
             
             \Log::debug('test multi msg');
             $news1 = $result;
+
+            $message2 = new Text($result);
+            $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
             
             return $news1;
         });
