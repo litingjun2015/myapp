@@ -102,7 +102,8 @@ class TestController extends Controller
         
 
 
-       
+        $text = new Text();
+        $text->setAttribute('content', '您好！overtrue。');
 
 
         $app->server->push(function ($message) {
@@ -207,8 +208,6 @@ class TestController extends Controller
             //TODO 发送语音
             
             return $result;
-        })->push(function ($message) {
-            return "您好！欢迎关注我!";
         });
 
         
