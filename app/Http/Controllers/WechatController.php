@@ -165,7 +165,7 @@ class WechatController extends Controller
                     ]);
                     \Log::debug($translation);
 
-                    $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
+                    $result = '【'.$text.'】 所对应越南语的意思是：'.$translation['text'];
                     \Log::debug($result);
                 }else if($detectResult['languageCode'] === 'vi'){
                      # The target language
@@ -176,7 +176,7 @@ class WechatController extends Controller
                      ]);
                      \Log::debug($translation);                    
  
-                     $result = '【'.$message['Content'].'】 所对应中文的意思是：'.$translation['text'];
+                     $result = '【'.$text.'】 所对应中文的意思是：'.$translation['text'];
                 }
                 
 
