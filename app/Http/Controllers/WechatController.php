@@ -82,11 +82,14 @@ class WechatController extends Controller
                 case 'event':
                     break;
                 case 'text':
+                    # The text to translate
+                    $text = $message['Content'];
                     break;
                 case 'image':
                     break;
                 case 'voice':
                     \Log::debug('收到语音消息');  
+                    $text = $message['Recognition'];
 
                     \Log::debug($message);
 
@@ -129,9 +132,6 @@ class WechatController extends Controller
 
                     // \Log::debug('保存语音消息');  
 
-                    
-
-
                     break;
                 case 'video':                
                     break;
@@ -143,13 +143,6 @@ class WechatController extends Controller
                 default:
                     break;
             }
-
-
-        
-
-
-            # The text to translate
-            $text = $message['Content'];
 
             if($text === '汇率') {
                 $result = sprintf("%-48s%-40s%-66s%-46s%-40s%-66s%-46s%-40s", 
