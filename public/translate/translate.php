@@ -5,6 +5,8 @@ require __DIR__ . '/vendor/autoload.php';
 # Imports the Google Cloud client library
 use Google\Cloud\Translate\TranslateClient;
 
+putenv('GOOGLE_APPLICATION_CREDENTIALS='.'/home/forge/default/public/translate/google.credentials.json');
+
 # Your Google Cloud Platform project ID
 $projectId = 'starlit-granite-20190622';
 
