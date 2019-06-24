@@ -64,8 +64,10 @@ class WechatController extends Controller
 
         $app->server->push(function ($message) {
 
-            return '您好！overtrue。';
+            return '您好！lao ding。';
         });
+
+        $response = $app->server->serve();    
 
         $app->server->push(function ($message) use ($app) {
 
