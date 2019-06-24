@@ -18,6 +18,8 @@ use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 
 use EasyWeChat\Factory;
 
+use EasyWeChat\Kernel\Messages\Text;
+
 
 class WechatController extends Controller
 {  
