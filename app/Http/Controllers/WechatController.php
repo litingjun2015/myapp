@@ -14,11 +14,12 @@ use Google\Cloud\Translate\TranslateClient;
 use Google\Cloud\Speech\V1\SpeechClient;
 use Google\Cloud\Speech\V1\RecognitionAudio;
 use Google\Cloud\Speech\V1\RecognitionConfig;
-use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
+// use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 
 // Imports the Cloud Client Library
 use Google\Cloud\TextToSpeech\V1\AudioConfig;
 use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
+use Google\Cloud\TextToSpeech\V1\AudioEncoding;
 use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
