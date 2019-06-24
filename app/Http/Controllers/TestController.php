@@ -158,18 +158,35 @@ class TestController extends Controller
             }
 
 
+        
+
+
             # The text to translate
             $text = $message['Content'];
-            # The target language
-            $target = 'vi';
 
-            # Translates some text into Russian
-            $translation = $translate->translate($text, [
-                'target' => $target
-            ]);
+            if($text == '汇率'){
+                $result = "1美元=6.8698人民币
+                1人民币=0.1456美元
+                
+                1越南盾=0.00030人民币
+                1人民币=3364.11越南盾
+                
+                1美元=23137.75越南盾
+                1越南盾=0.000043美元";
+            }else{
 
-            $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
+                # The target language
+                $target = 'vi';
 
+                # Translates some text into Russian
+                $translation = $translate->translate($text, [
+                    'target' => $target
+                ]);
+
+                $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
+
+            }
+            
             //TODO 发送语音
             
             return $result;
