@@ -55,10 +55,7 @@ class WechatController extends Controller
 
         $app = Factory::officialAccount($config);
 
-        
-
-
-        \Log::debug('logging..');
+    
 
 
         $app->server->push(function ($message) {
@@ -78,7 +75,6 @@ class WechatController extends Controller
                 case 'event':
                     break;
                 case 'text':
-                    \Log::debug('收到文字消息');
                     break;
                 case 'image':
                     break;
@@ -137,22 +133,20 @@ class WechatController extends Controller
                     # The target language
                     $target = 'vi';
 
-                    # Translates some text into Russian
                     $translation = $translate->translate($text, [
                         'target' => $target
                     ]);
-                    \Log::debug($translation);
+                    // \Log::debug($translation);
 
                     $result = '【'.$message['Content'].'】 所对应越南语的意思是：'.$translation['text'];
                 }else if($detectResult['languageCode'] === 'vi'){
                      # The target language
                      $target = 'zh-CN';
 
-                     # Translates some text into Russian
                      $translation = $translate->translate($text, [
                          'target' => $target
                      ]);
-                     \Log::debug($translation);                    
+                    //  \Log::debug($translation);                    
  
                      $result = '【'.$message['Content'].'】 所对应中文的意思是：'.$translation['text'];
                 }
@@ -166,7 +160,7 @@ class WechatController extends Controller
         });
 
         $response = $app->server->serve();    
-        \Log::debug($response);
+        // \Log::debug($response);
 
         return $response;
     }
