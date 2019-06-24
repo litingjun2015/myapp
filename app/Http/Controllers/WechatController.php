@@ -245,7 +245,7 @@ class WechatController extends Controller
                     // build the voice request, select the language code ("en-US") and the ssml
                     // voice gender
                     $voice = (new VoiceSelectionParams())
-                    ->setLanguageCode('zh-Hans')
+                    ->setLanguageCode('zh')
                     ->setSsmlGender(SsmlVoiceGender::FEMALE);
 
                     // Effects profile
