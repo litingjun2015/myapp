@@ -12,7 +12,7 @@ Route::delete('articles/{id}', 'ArticleController@delete');
 
 Route::get('test', 'TestController@index');
 
-//越南语
-Route::post('vi', 'WechatController@vi');
+//越南语 vi
+Route::post('wechat', 'WechatController@vi'); 
 
 Route::post('my', 'TestController@my');
