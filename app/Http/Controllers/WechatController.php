@@ -62,10 +62,7 @@ class WechatController extends Controller
 
         $app = Factory::officialAccount($config);
 
-    
-
-
-        $app->server->push(function ($message) {
+        $app->server->push(function ($message) use ($app) {
 
             //TODO
             putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
@@ -179,12 +176,13 @@ class WechatController extends Controller
                      $result = '【'.$text.'】 所对应中文的意思是：'.$translation['text'];
                 }
                 
+                //TODO 发送语音
+                $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
+                \Log::debug($audio);  
 
             }
             
-            //TODO 发送语音
-            $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
-            \Log::debug($audio);       
+                  
             
             return $result;
         });
