@@ -16,6 +16,14 @@ use Google\Cloud\Speech\V1\RecognitionAudio;
 use Google\Cloud\Speech\V1\RecognitionConfig;
 use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 
+// Imports the Cloud Client Library
+use Google\Cloud\TextToSpeech\V1\AudioConfig;
+use Google\Cloud\TextToSpeech\V1\AudioEncoding;
+use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
+use Google\Cloud\TextToSpeech\V1\SynthesisInput;
+use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
+use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
+
 use EasyWeChat\Factory;
 
 use EasyWeChat\Kernel\Messages\Text;
@@ -158,6 +166,9 @@ class WechatController extends Controller
                 "1美元=6.8698人民币", "1人民币=0.1456美元", "", "1越南盾=0.00030人民币", "1人民币=3364.11越南盾", "","1美元=23137.75越南盾", "1越南盾=0.000043美元" );
             } else {
 
+                // instantiates a client
+                $client = new TextToSpeechClient();
+
                 # 语言检测
                 $detectResult = $translate->detectLanguage($text);
                 \Log::debug("Language code: $detectResult[languageCode]\n");
@@ -174,6 +185,37 @@ class WechatController extends Controller
 
                     $result = '【'.$text.'】 所对应越南语的意思是：'.$translation['text'];
                     \Log::debug($result);
+
+
+                    // to speech
+
+                    // sets text to be synthesised
+                    $synthesisInputText = (new SynthesisInput())
+                    ->setText($translation['text']);
+
+                    // build the voice request, select the language code ("en-US") and the ssml
+                    // voice gender
+                    $voice = (new VoiceSelectionParams())
+                    ->setLanguageCode('vi')
+                    ->setSsmlGender(SsmlVoiceGender::FEMALE);
+
+                    // Effects profile
+                    $effectsProfileId = "telephony-class-application";
+
+                    // select the type of audio file you want returned
+                    $audioConfig = (new AudioConfig())
+                    ->setAudioEncoding(AudioEncoding::MP3)
+                    ->setEffectsProfileId(array($effectsProfileId));
+
+                    // perform text-to-speech request on the text input with selected voice
+                    // parameters and audio file type
+                    $response = $client->synthesizeSpeech($synthesisInputText, $voice, $audioConfig);
+                    $audioContent = $response->getAudioContent();
+
+                    // the response's audioContent is binary
+                    file_put_contents("output'.$message['FromUserName'].mp3", $audioContent);
+
+
                 }else if($detectResult['languageCode'] === 'vi'){
                      # The target language
                      $target = 'zh-CN';
@@ -195,7 +237,7 @@ class WechatController extends Controller
             $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
 
             //TODO 发送语音
-            $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
+            $audio = $app->media->uploadVoice("output'.$message['FromUserName'].mp3");
             \Log::debug($audio['media_id']);  
 
             $voice = new Voice($audio['media_id']);
