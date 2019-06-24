@@ -60,7 +60,9 @@ class TestController extends Controller
 
 
     public function wechat()
-    {                
+    {            
+        \Log::debug('TestController wechat ..');
+            
         $config = [
             // 客户
             'app_id' => 'wx4fcd7ab419b697c2',
@@ -100,7 +102,7 @@ class TestController extends Controller
         
 
 
-        \Log::debug('logging..');
+       
 
 
         $app->server->push(function ($message) {

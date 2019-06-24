@@ -18,7 +18,9 @@ class WechatController extends Controller
 {  
 
     public function vi()
-    {                
+    {             
+        \Log::debug('WechatController vi ..');
+
         $config = [
             // 客户
             'app_id' => 'wx4fcd7ab419b697c2',
