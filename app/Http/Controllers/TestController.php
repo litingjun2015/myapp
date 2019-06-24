@@ -62,8 +62,11 @@ class TestController extends Controller
     public function wechat()
     {                
         $config = [
-            'app_id' => 'wx4fcd7ab419b697c2',
-            'secret' => '313ef808ffed2c0dc14dc7807f81a165',
+            // 客户
+            // 'app_id' => 'wx4fcd7ab419b697c2',
+            // 'secret' => '313ef808ffed2c0dc14dc7807f81a165',
+            'app_id' => 'wxcd7ec00d2312ec55',
+            'secret' => '85944ad4b1e762f1c6e9008f1c617782',
             'token' => 'TestToken',
             'aes_key' => 'JH9XRkdMzta8CgcAc8FuCqSqSNwiAbH3pKZROdRnbzq',
             'response_type' => 'array',
