@@ -12,3 +12,5 @@ Route::delete('articles/{id}', 'ArticleController@delete');
 
 Route::get('test', 'TestController@index');
 Route::post('wechat', 'TestController@wechat');
+
+Route::post('my', 'TestController@my');
