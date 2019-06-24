@@ -313,9 +313,21 @@ class TestController extends Controller
             return $result;
         });
 
-        $response = $app->server->serve(); 
-        $response = $app->server->serve();    
+        $response = $app->server->serve();     
         \Log::debug($response);
+
+
+        $app->server->push(function ($message) {
+            return "您好！欢迎关注我!";
+        });
+        
+        $response = $server->serve();
+
+        $app->server->push(function ($message) {
+            return "您好！欢迎关注我!";
+        });
+        
+        $response = $server->serve();
 
         return $response;
     }
