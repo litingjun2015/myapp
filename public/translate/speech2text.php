@@ -8,7 +8,7 @@ use Google\Cloud\Speech\V1\RecognitionAudio;
 use Google\Cloud\Speech\V1\RecognitionConfig;
 use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 
-putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS='.'/home/forge/default/public/translate/google.credentials.json');
 
 # The name of the audio file to transcribe
 $audioFile = __DIR__ . '/audio32KHz.raw';
