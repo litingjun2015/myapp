@@ -88,44 +88,46 @@ class WechatController extends Controller
                 case 'voice':
                     \Log::debug('收到语音消息');  
 
-                    $date = date("Ymdhms");
-                    list($usec, $sec) = explode(" ", microtime());  
-                    $msec=round($usec*1000);  
-                    $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
-                    $timestring = $date.$millisecond;
+                    \Log::debug($message);
 
-                    \Log::debug("audio".$timestring.".raw");
-                    \Log::debug($message['MediaId']);
+                    // $date = date("Ymdhms");
+                    // list($usec, $sec) = explode(" ", microtime());  
+                    // $msec=round($usec*1000);  
+                    // $millisecond = str_pad($msec,3,'0',STR_PAD_RIGHT);
+                    // $timestring = $date.$millisecond;
 
-                    $stream = $app->media->get($message['MediaId']);
+                    // \Log::debug("audio".$timestring.".raw");
+                    // \Log::debug($message['MediaId']);
 
-                    # The audio file's encoding, sample rate and language
-                    $config = new RecognitionConfig([
-                        'encoding' => AudioEncoding::AMR,
-                        'sample_rate_hertz' => 8000,
-                        'language_code' => 'en-US'
-                    ]);
+                    // $stream = $app->media->get($message['MediaId']);
 
-                    # Instantiates a client
-                    $client = new SpeechClient();
+                    // # The audio file's encoding, sample rate and language
+                    // $config = new RecognitionConfig([
+                    //     'encoding' => AudioEncoding::AMR,
+                    //     'sample_rate_hertz' => 8000,
+                    //     'language_code' => 'en-US'
+                    // ]);
 
-                    # Detects speech in the audio file
-                    $response = $client->recognize($config, $stream);
-                    \Log::debug($response);
+                    // # Instantiates a client
+                    // $client = new SpeechClient();
 
-                    # Print most likely transcription
-                    foreach ($response->getResults() as $result) {
-                        $alternatives = $result->getAlternatives();
-                        $mostLikely = $alternatives[0];
-                        $transcript = $mostLikely->getTranscript();
-                        // printf('Transcript: %s' . PHP_EOL, $transcript);
+                    // # Detects speech in the audio file
+                    // $response = $client->recognize($config, $stream);
+                    // \Log::debug($response);
 
-                        \Log::debug($transcript);  
+                    // # Print most likely transcription
+                    // foreach ($response->getResults() as $result) {
+                    //     $alternatives = $result->getAlternatives();
+                    //     $mostLikely = $alternatives[0];
+                    //     $transcript = $mostLikely->getTranscript();
+                    //     // printf('Transcript: %s' . PHP_EOL, $transcript);
+
+                    //     \Log::debug($transcript);  
 
                         
-                    }
+                    // }
 
-                    \Log::debug('保存语音消息');  
+                    // \Log::debug('保存语音消息');  
 
                     
 
