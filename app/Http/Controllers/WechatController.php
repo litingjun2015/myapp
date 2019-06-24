@@ -183,6 +183,8 @@ class WechatController extends Controller
             }
             
             //TODO 发送语音
+            $audio = $app->media->uploadVoice('/home/forge/default/public/translate/output.mp3');
+            \Log::debug($audio);       
             
             return $result;
         });
