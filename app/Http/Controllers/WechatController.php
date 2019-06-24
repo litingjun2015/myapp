@@ -91,7 +91,7 @@ class WechatController extends Controller
                     \Log::debug('收到语音消息');  
                     $text = $message['Recognition'];
 
-                    \Log::debug($message);
+                    \Log::debug($message);                    
 
                     // $date = date("Ymdhms");
                     // list($usec, $sec) = explode(" ", microtime());  
@@ -144,6 +144,8 @@ class WechatController extends Controller
                     break;
             }
 
+            \Log::debug($text);
+            
             if($text === '汇率') {
                 $result = sprintf("%-48s%-40s%-66s%-46s%-40s%-66s%-46s%-40s", 
                 "1美元=6.8698人民币", "1人民币=0.1456美元", "", "1越南盾=0.00030人民币", "1人民币=3364.11越南盾", "","1美元=23137.75越南盾", "1越南盾=0.000043美元" );
