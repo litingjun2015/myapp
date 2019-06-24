@@ -67,7 +67,10 @@ class WechatController extends Controller
 
         $app->server->push(function ($message) use ($app) {
 
-            \Log::debug($message);                 
+            \Log::debug($message);          
+            
+            $message2 = new Text('Hello world!');
+            $result = $app->customer_service->message($message2)->to($message['FromUserName'])->send();
 
             //TODO
             putenv('GOOGLE_APPLICATION_CREDENTIALS='.resource_path().'/google.credentials.json');
