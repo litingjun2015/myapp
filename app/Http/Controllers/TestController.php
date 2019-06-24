@@ -102,8 +102,17 @@ class TestController extends Controller
         
 
 
-        $text = new Text();
-        $text->setAttribute('content', '您好！overtrue。');
+        
+
+        $app->server->push(function ($message) {
+
+            $text = new Text();
+            $text->setAttribute('content', '您好！overtrue。');
+
+            return $text;
+        });
+        
+        $response = $server->serve();
 
 
         $app->server->push(function ($message) {
