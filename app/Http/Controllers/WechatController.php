@@ -62,6 +62,14 @@ class WechatController extends Controller
 
         $app = Factory::officialAccount($config);
 
+        $app->server->push(function ($message) {
+
+            $text = new Text();
+            $text->setAttribute('content', '您好！overtrue。');
+
+            return $text;
+        });
+
         $app->server->push(function ($message) use ($app) {
 
             //TODO
