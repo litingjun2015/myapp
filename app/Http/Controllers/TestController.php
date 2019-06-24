@@ -172,8 +172,8 @@ class TestController extends Controller
 
                 # 语言检测
                 $detectResult = $translate->detectLanguage($text);
-                \Log::debug("Language code: $result[languageCode]\n");
-                \Log::debug("Confidence: $result[confidence]\n");
+                \Log::debug("Language code: $detectResult[languageCode]\n");
+                \Log::debug("Confidence: $detectResult[confidence]\n");
 
                 if($detectResult['languageCode'] === 'zh-CN'){
                     # The target language
