@@ -64,10 +64,7 @@ class WechatController extends Controller
 
         $app->server->push(function ($message) {
 
-            $text = new Text();
-            $text->setAttribute('content', '您好！overtrue。');
-
-            return $text;
+            return '您好！overtrue。';
         });
 
         $app->server->push(function ($message) use ($app) {
