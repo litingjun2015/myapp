@@ -10,7 +10,7 @@ use Google\Cloud\TextToSpeech\V1\SynthesisInput;
 use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 
-putenv('GOOGLE_APPLICATION_CREDENTIALS='.'/home/forge/default/public/translate/google.credentials.json');
+putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/google.credentials.json');
 
 // instantiates a client
 $client = new TextToSpeechClient();

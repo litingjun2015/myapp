@@ -1,10 +1,8 @@
 <?php
+function console($data){
+  $stdout = fopen('php://stdout', 'w');
+  fwrite($stdout,json_encode($data)."\n");   //为了打印出来的格式更加清晰，把所有数据都格式化成Json字符串
+  fclose($stdout);
+}
 
-// 显示所有信息，默认显示 INFO_ALL
-phpinfo();
-
-// Show just the module information. 仅仅显示PHP模块信息，
-// phpinfo(8) 返回同样的结果。
-phpinfo(INFO_MODULES);
-
-?>
+console(__DIR__);
