@@ -28,10 +28,15 @@ class Index
 {
     public function index()
     {
-        echo $this->translate('你几岁了?');
+        echo '【你几岁了?】翻译成英文为：' . $this->translate('你几岁了?');
+        echo '<br>';
+        echo '语音 <a href="./voice.amr">voice.amr</a> 转换为文本：';
         $content = file_get_contents('./voice.amr');
         echo $this->speech2Text($content);
-        echo $this->text2Speech('how old are you?');
+        echo '<br>';
+        echo '文本 "how old are you?" 转换为语音：';
+        $file = $this->text2Speech('how old are you?');
+        echo '<audio src="' . $file . '"></audio>';
     }
 
     /**
