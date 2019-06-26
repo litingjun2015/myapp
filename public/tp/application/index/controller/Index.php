@@ -40,57 +40,6 @@ class Index
     }
 
     /**
-     * 文本消息回调
-     */
-    private function callbackText($message, $app) 
-    {
-        $content = '翻译';
-        // // 翻译成默认语言
-        // $content = $this->translate($message['Content']);
-
-        // // 文本转为语音, 并保存在默认目录
-        // $this->text2Speech($content);
-
-        // 创建文本消息
-        $text = new Text($content);
-
-        return $text;
-    } 
-
-    /**
-     * 图片消息回调
-     */
-    private function callbackImage($message, $app) 
-    {
-        // 创建图片消息
-        $image = new Image($message['MediaId']);
-
-        return $image;
-    }
-
-    /**
-     * 
-     */
-    private function callbackVoice($message, $app)
-    {
-        // 创建文本消息
-        $text = new Text('对不起, 请再说一遍.');
-
-        // 获取用户发送语音文件, 并保存到本地
-        $stream = $app->media->get($message['MediaId']);
-        if ($stream instanceof \EasyWeChat\Kernel\Http\StreamResponse) {
-            // 获取用户语音内容, 并转文本
-            $content = $stream->getBody()->getContents();
-            $content = $this->speech2Text($content);
-
-            // 修改文本消息内容
-            $text->content = $content;
-        }
-
-        return $text;
-    }
-
-    /**
      * 设置 Google 授权文件环境变量
      */
     private function setEnvGoogleCredentials() 
