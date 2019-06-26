@@ -25,7 +25,7 @@ $audio = (new RecognitionAudio())
 $config = new RecognitionConfig([
     'encoding' => AudioEncoding::AMR,
     'sample_rate_hertz' => 8000,
-    'language_code' => 'en-US'
+    'language_code' => 'zh-CN'
 ]);
 
 # Instantiates a client
