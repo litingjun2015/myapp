@@ -152,7 +152,7 @@ class Index
         return $transcript;
     }
 
-    private function text2Speech($text, $language = 'en-US', $path = __DIR__ . '/upload/voice') {
+    private function text2Speech($text, $language = 'en-US', $path = './upload/voice') {
          // 设置 Google 授权文件环境变量
          $this->setEnvGoogleCredentials();
         
