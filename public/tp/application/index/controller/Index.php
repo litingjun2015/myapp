@@ -36,7 +36,7 @@ class Index
         echo '<br>';
         echo '文本 "how old are you?" 转换为语音：';
         $file = $this->text2Speech('how old are you?');
-        echo '<audio src="' . $file . '"></audio>';
+        echo '<audio controls="controls"><source src="' . $file . '" type="audio/mpeg"></audio>';
     }
 
     /**
