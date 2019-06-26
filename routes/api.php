@@ -3,7 +3,11 @@
 use Illuminate\Http\Request;
 
 Use App\Article;
- 
+
+
+Route::any('/wechat', 'WeChatController@serve');
+
+// Test
 Route::get('articles', 'ArticleController@index');
 Route::get('articles/{id}', 'ArticleController@show');
 Route::post('articles', 'ArticleController@store');
