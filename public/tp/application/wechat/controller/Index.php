@@ -27,10 +27,10 @@ class Index
 {
     public function index()
     {
-        echo $this->translate('你好');
+        echo $this->translate('你几岁了?');
         $content = file_get_contents('./voice.amr');
         echo $this->speech2Text($content);
-        echo $this->text2Speech('Hello');
+        echo $this->text2Speech('how old are you?');
     }
 
     /**
@@ -38,7 +38,7 @@ class Index
      */
     private function callbackText($message, $app) 
     {
-        $content = '翻译.';
+        $content = '翻译';
         // // 翻译成默认语言
         // $content = $this->translate($message['Content']);
 
@@ -93,22 +93,21 @@ class Index
     }
 
     /**
-     * 文本翻译 translate
+     * 文本翻译
      */
-    private function translate($text, $target = 'en-US') 
-    {
+    private function translate($text, $target = 'en') {
         // 设置 Google 授权文件环境变量
         $this->setEnvGoogleCredentials();
 
-        # Your Google Cloud Platform project ID
+        # Google Cloud Platform 项目编号
         $projectId = 'starlit-granite-20190622';
 
-        # Instantiates a client
+        # 初始化客户客实例
         $translate = new TranslateClient([
             'projectId' => $projectId
         ]);
 
-        # Translates some text into Russian
+        # 将文本内容翻译为目标语语言
         $translation = $translate->translate($text, [
             'target' => $target
         ]);
@@ -119,72 +118,68 @@ class Index
     /**
      * 语音转文本
      */
-    private function speech2Text($content, $language = 'zh-CN', $encoding = AudioEncoding::AMR, $sampleRate = 8000) 
-    {
+    private function speech2Text($content, $language = 'zh-CN', $encoding = AUDIO_ENCODING_AMR, $sampleRate = 8000) {
          // 设置 Google 授权文件环境变量
          $this->setEnvGoogleCredentials();
 
-        # set string as audio content
+        # 设置语音内容
         $audio = (new RecognitionAudio())
         ->setContent($content);
     
-        # The audio file's encoding, sample rate and language
+        # 设置语音属性: 编码、波特率、语言
         $config = new RecognitionConfig([
             'encoding' => $encoding,
             'sample_rate_hertz' => $sampleRate,
             'language_code' => $language
         ]);
         
-        # Instantiates a client
+        # 初始化客户端实例
         $client = new SpeechClient();
         
-        # Detects speech in the audio file
+        # 检测语音, 获取返回结果
         $response = $client->recognize($config, $audio);
         
-        # Print most likely transcription
+        # 转换为文本
         foreach ($response->getResults() as $result) {
             $alternatives = $result->getAlternatives();
             $mostLikely = $alternatives[0];
             $transcript = $mostLikely->getTranscript();
         }
-        
+        // 关闭实例对象
         $client->close();
 
         return $transcript;
     }
 
-    private function text2Speech($text, $language = 'en-US', $path = './upload/voice') 
-    {
+    private function text2Speech($text, $language = 'en-US', $path = __DIR__ . '/upload/voice') {
          // 设置 Google 授权文件环境变量
          $this->setEnvGoogleCredentials();
         
-        // instantiates a client
+        // 初始化客户端实例
         $client = new TextToSpeechClient();
 
-        // sets text to be synthesised
+        // 设置文本内容
         $synthesisInputText = (new SynthesisInput())
             ->setText($text);
 
-        // build the voice request, select the language code ("en-US") and the ssml
-        // voice gender
+        // 创建语音请求, 选择语言, 语音性别
         $voice = (new VoiceSelectionParams())
             ->setLanguageCode($language)
             ->setSsmlGender(SsmlVoiceGender::FEMALE);
 
-        // Effects profile
+        // 效果模式
         $effectsProfileId = "telephony-class-application";
 
-        // select the type of audio file you want returned
+        // 设置返回文件类型
         $audioConfig = (new AudioConfig())
-            ->setAudioEncoding(TextToSpeechAudioEncoding::MP3)
+            ->setAudioEncoding(AUDIO_ENCODING_MP3)
             ->setEffectsProfileId(array($effectsProfileId));
 
-        // perform text-to-speech request on the text input with selected voice
-        // parameters and audio file type
+        // 请求语音内容
         $response = $client->synthesizeSpeech($synthesisInputText, $voice, $audioConfig);
         $audioContent = $response->getAudioContent();
 
-        // the response's audioContent is binary
+        // 将语音内容保存为文件
         $file = $path . '/' . date('Ymdhms') . '.mp3';
         file_put_contents($file, $audioContent);
 
