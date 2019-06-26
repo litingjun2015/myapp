@@ -27,7 +27,7 @@ class Index
 {
     public function index()
     {
-        echo $this->translate('hello');
+        echo $this->translate('你好');
         // $content = file_get_contents('./voice.amr');
         // echo $this->speech2Text($content);
         // echo $this->text2Speech('Hello');
@@ -95,7 +95,7 @@ class Index
     /**
      * 文本翻译 translate
      */
-    private function translate($text, $target = 'ru') 
+    private function translate($text, $target = 'en') 
     {
         // 设置 Google 授权文件环境变量
         $this->setEnvGoogleCredentials();
