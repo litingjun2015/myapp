@@ -24,8 +24,8 @@ $audio = (new RecognitionAudio())
 
 # The audio file's encoding, sample rate and language
 $config = new RecognitionConfig([
-    'encoding' => AudioEncoding::LINEAR16,
-    'sample_rate_hertz' => 32000,
+    'encoding' => AudioEncoding::AMR,
+    'sample_rate_hertz' => 8000,
     'language_code' => 'en-US'
 ]);
 
