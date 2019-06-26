@@ -16,7 +16,7 @@ $audioFile = __DIR__ . '/voice.amr';
 
 # get contents of a file into a string
 $content = file_get_contents($audioFile);
-
+// print_r($content);exit;
 # set string as audio content
 $audio = (new RecognitionAudio())
     ->setContent($content);
@@ -25,7 +25,7 @@ $audio = (new RecognitionAudio())
 $config = new RecognitionConfig([
     'encoding' => AudioEncoding::AMR,
     'sample_rate_hertz' => 8000,
-    'language_code' => 'en-US'
+    'language_code' => 'zh-CN'
 ]);
 
 # Instantiates a client
