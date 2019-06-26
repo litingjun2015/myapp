@@ -16,7 +16,7 @@ $audioFile = __DIR__ . '/voice.flac';
 
 # get contents of a file into a string
 $content = file_get_contents($audioFile);
-print_r($content);exit;
+// print_r($content);exit;
 # set string as audio content
 $audio = (new RecognitionAudio())
     ->setContent($content);
