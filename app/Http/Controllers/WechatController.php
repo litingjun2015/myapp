@@ -42,7 +42,7 @@ class WechatController extends Controller
             'app_id' => 'wx4fcd7ab419b697c2',
             'secret' => '313ef808ffed2c0dc14dc7807f81a165',
             'token' => 'TestToken',
-            'aes_key' => 'JH9XRkdMzta8CgcAc8FuCqSqSNwiAbH3pKZROdRnbzq',
+            'aes_key' => 'GGYIS4nU2PIQ28TUE1hg3ik2aknH8Wy18n4infkK1mz',
             'response_type' => 'array',
 
              /**
