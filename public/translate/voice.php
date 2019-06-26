@@ -11,19 +11,19 @@ use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/google.credentials.json');
 
 # The name of the audio file to transcribe
-$audioFile = __DIR__ . '/voice.amr';
+$audioFile = __DIR__ . '/voice.flac';
 
 
 # get contents of a file into a string
 $content = file_get_contents($audioFile);
-
+print_r($content);exit;
 # set string as audio content
 $audio = (new RecognitionAudio())
     ->setContent($content);
 
 # The audio file's encoding, sample rate and language
 $config = new RecognitionConfig([
-    'encoding' => AudioEncoding::AMR,
+    'encoding' => AudioEncoding::FLAC,
     'sample_rate_hertz' => 8000,
     'language_code' => 'en-US'
 ]);
