@@ -22,7 +22,7 @@ use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
 use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
 
 define('AUDIO_ENCODING_AMR', \Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding::AMR);
-define('AUDIO_ENDODING_MP3', \Google\Cloud\TextToSpeech\V1\AudioEncoding::MP3);
+define('AUDIO_ENCODING_MP3', \Google\Cloud\TextToSpeech\V1\AudioEncoding::MP3);
 
 class Index
 {
