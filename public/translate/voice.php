@@ -11,7 +11,7 @@ use Google\Cloud\Speech\V1\RecognitionConfig\AudioEncoding;
 putenv('GOOGLE_APPLICATION_CREDENTIALS=' . __DIR__ . '/google.credentials.json');
 
 # The name of the audio file to transcribe
-$audioFile = __DIR__ . '/voice.flac';
+$audioFile = __DIR__ . '/voice.amr';
 
 
 # get contents of a file into a string
