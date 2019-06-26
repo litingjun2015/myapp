@@ -119,7 +119,7 @@ class Index
     /**
      * 语音转文本
      */
-    private function speech2Text($content, $language = 'zh-CN', $encoding = AudioEncoding::AMR, $sampleRate = 8000) 
+    private function speech2Text($content, $language = 'zh-CN', $sampleRate = 8000) 
     {
          // 设置 Google 授权文件环境变量
          $this->setEnvGoogleCredentials();
@@ -130,7 +130,7 @@ class Index
     
         # The audio file's encoding, sample rate and language
         $config = new RecognitionConfig([
-            'encoding' => $encoding,
+            'encoding' => AudioEncoding::AMR,
             'sample_rate_hertz' => $sampleRate,
             'language_code' => $language
         ]);
