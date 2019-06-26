@@ -28,9 +28,9 @@ class Index
     public function index()
     {
         echo $this->translate('你好');
-        // $content = file_get_contents('./voice.amr');
-        // echo $this->speech2Text($content);
-        // echo $this->text2Speech('Hello');
+        $content = file_get_contents('./voice.amr');
+        echo $this->speech2Text($content);
+        echo $this->text2Speech('Hello');
     }
 
     /**
