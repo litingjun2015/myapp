@@ -6,6 +6,7 @@ Use App\Article;
 
 
 Route::any('wechat', 'WechatController@serve');
+Route::any('ru', 'WechatController@ru'); // 俄罗斯/俄语
 
 // Test
 Route::get('articles', 'ArticleController@index');
